@@ -16,13 +16,15 @@ const App = () => {
 
     setUsername(user);
 
-    db.collection("messages").onSnapshot((snapshot) => {
-      setMessages(
-        snapshot.docs.map((doc) => {
-          return doc.data();
-        })
-      );
-    });
+    db.collection("messages")
+      .orderBy("timestamp", "asc")
+      .onSnapshot((snapshot) => {
+        setMessages(
+          snapshot.docs.map((doc) => {
+            return doc.data();
+          })
+        );
+      });
   }, []);
 
   const sendMessage = (event) => {
@@ -33,13 +35,15 @@ const App = () => {
       timestamp: firebase.firestore.FieldValue.serverTimestamp(),
     });
 
-    db.collection("messages").onSnapshot((snapshot) => {
-      setMessages(
-        snapshot.docs.map((doc) => {
-          return doc.data();
-        })
-      );
-    });
+    db.collection("messages")
+      .orderBy("timestamp", "asc")
+      .onSnapshot((snapshot) => {
+        setMessages(
+          snapshot.docs.map((doc) => {
+            return doc.data();
+          })
+        );
+      });
     setInput("");
   };
 
