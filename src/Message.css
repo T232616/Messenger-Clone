@@ -1,0 +1,16 @@
+.message_user {
+  border: 2px solid #000;
+  display: inline-block;
+ 
+}
+.message_thisUser {
+  border: 2px solid red;
+  display:inline-block;
+ 
+}
+.messages{
+  display:flex;
+  
+
+
+}
