@@ -28,7 +28,7 @@ const App = () => {
 
     try {
       db.collection("messages")
-        .orderBy("timestamp", "desc")
+        .orderBy("timestamp", "asc")
         .onSnapshot((snapshot) => {
           setMessages(
             snapshot.docs.map((doc) => {
@@ -50,7 +50,7 @@ const App = () => {
     });
     try {
       db.collection("messages")
-        .orderBy("timestamp", "desc")
+        .orderBy("timestamp", "asc")
         .onSnapshot((snapshot) => {
           setMessages(
             snapshot.docs.map((doc) => {
@@ -69,49 +69,45 @@ const App = () => {
   };
 
   return (
-    <>
-      <section className="App">
-        <h1 className="shadow">Welcome to CHHAMP</h1>
-        <section className="header">
-          <section className="messages">
-            {messages.map((messageContent) => {
-              return (
-                <Message
-                  message={messageContent.message}
-                  username={messageContent.username}
-                  thisUser={username}
-                />
-              );
-            })}
-          </section>
-          <form className="form_alignment">
-            <FormControl className="inputField">
-              <InputLabel htmlFor="my-input">Enter your Message...</InputLabel>
-
-              <Input
-                value={input}
-                onChange={SetInput}
-                id="my-input"
-                aria-describedby="my-helper-text"
+    <section className="App">
+      <h1 className="shadow">Welcome to CHHAMP</h1>
+      <section className="header">
+        <section className="messages">
+          {messages.map((messageContent) => {
+            return (
+              <Message
+                message={messageContent.message}
+                username={messageContent.username}
+                thisUser={username}
               />
-              <FormHelperText id="my-helper-text">
-                Your Messages are end to end encrypted
-              </FormHelperText>
-            </FormControl>
-            <Button
-              onClick={sendMessage}
-              className="sendButton"
-              variant="contained"
-            >
-              <SendIcon />
-            </Button>
-          </form>
-          <div className="arr">
-            <ArrowDownwardIcon />
-          </div>
+            );
+          })}
         </section>
+        <form className="form_alignment shadow">
+          <FormControl className="inputField">
+            <InputLabel htmlFor="my-input">Enter your Message...</InputLabel>
+
+            <Input
+              value={input}
+              onChange={SetInput}
+              id="my-input"
+              aria-describedby="my-helper-text"
+            />
+            <FormHelperText id="my-helper-text">
+              Your Messages are end to end encrypted
+            </FormHelperText>
+          </FormControl>
+          <Button
+            onClick={sendMessage}
+            className="sendButton"
+            variant="contained"
+            disabled={!input}
+          >
+            <SendIcon />
+          </Button>
+        </form>
       </section>
-    </>
+    </section>
   );
 };
 export default App;
