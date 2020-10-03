@@ -1,21 +1,47 @@
+
 .message_user {
-  border: 2px solid #000;
   display: inline-block;
   float: left;
-clear: both;
- 
+  clear: both;
+  background-color: rgb(27, 196, 27) !important;
+  margin: 10px;
+  height: auto;
+  padding: 3px 10px;
+  overflow: auto;
 }
 .message_thisUser {
-  border: 2px solid red;
+  background-color: rgb(255, 255, 68) !important;
   display: inline-block;
   float: right;
+  padding: 3px 10px;
   clear: both;
- 
+  margin: 10px;
 
+  height: auto;
+  overflow: auto;
 }
-.messages
-{
-  width:80%;
-  margin:auto;
-  margin:5%;
+.messages {
+  width: 80%;
+  margin: auto;
+}
+.cardContent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  outline: none !important;
+  margin: 0;
+  padding: 0;
+}
+.name {
+  color: rgba(0, 0, 0, 0.4) !important;
+  overflow: hidden !important;
+}
+.iB {
+  outline: none !important;
+  overflow: hidden !important;
+}
+.iM {
+  outline: none !important;
+  overflow: hidden !important;
 }

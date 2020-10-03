@@ -50,7 +50,7 @@ const App = () => {
   return (
     <div className="App">
       <div className="header">
-        <h1>Welcome to Messenger</h1>
+        <h1>Welcome to CHHAMP</h1>
         <form>
           <input value={input} onChange={Input} type="text" />
           <button onClick={sendMessage}>Send</button>
