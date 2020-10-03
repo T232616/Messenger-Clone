@@ -1,5 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import SendIcon from "@material-ui/icons/Send";
+import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 import "./App.css";
 import {
   InputLabel,
@@ -18,20 +20,25 @@ const App = () => {
   const SetInput = (event) => {
     setInput(event.target.value);
   };
+
   useEffect(() => {
     const user = prompt("Enter your Username:");
 
     setUsername(user);
 
-    db.collection("messages")
-      .orderBy("timestamp", "asc")
-      .onSnapshot((snapshot) => {
-        setMessages(
-          snapshot.docs.map((doc) => {
-            return doc.data();
-          })
-        );
-      });
+    try {
+      db.collection("messages")
+        .orderBy("timestamp", "desc")
+        .onSnapshot((snapshot) => {
+          setMessages(
+            snapshot.docs.map((doc) => {
+              return doc.data();
+            })
+          );
+        });
+    } catch (error) {
+      return { username: "UnDefined", message: "Not Connected" };
+    }
   }, []);
 
   const sendMessage = (event) => {
@@ -41,24 +48,35 @@ const App = () => {
       message: input,
       timestamp: firebase.firestore.FieldValue.serverTimestamp(),
     });
-
-    db.collection("messages")
-      .orderBy("timestamp", "asc")
-      .onSnapshot((snapshot) => {
-        setMessages(
-          snapshot.docs.map((doc) => {
-            return doc.data();
-          })
-        );
+    try {
+      db.collection("messages")
+        .orderBy("timestamp", "desc")
+        .onSnapshot((snapshot) => {
+          setMessages(
+            snapshot.docs.map((doc) => {
+              return doc.data();
+            })
+          );
+        });
+    } catch (error) {
+      setMessages(...messages, {
+        username: "Undefined",
+        message: "Not Connected",
       });
+    }
+
     setInput("");
   };
 
+
   return (
+    <>
+    <h1>Welcome to CHHAMP</h1>
     <div className="App">
+     
       <div className="header">
-        <h1>Welcome to CHHAMP</h1>
-        <form>
+        
+        <form className="form_alignment">
           <FormControl>
             <InputLabel htmlFor="my-input">Enter your Message...</InputLabel>
 
@@ -72,8 +90,8 @@ const App = () => {
               Your Messages are end to end encrypted
             </FormHelperText>
           </FormControl>
-          <Button onClick={sendMessage} variant="contained" color="primary">
-            Primary
+          <Button onClick={sendMessage} className="submit" variant="contained">
+            <SendIcon />
           </Button>
         </form>
 
@@ -88,8 +106,12 @@ const App = () => {
             );
           })}
         </div>
+        <div className="arr">
+          <ArrowDownwardIcon  />
+        </div>
       </div>
     </div>
+    </>
   );
 };
 export default App;
