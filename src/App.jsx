@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import SendIcon from "@material-ui/icons/Send";
-import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
+import ArrowDownwardIcon from "@material-ui/icons/ArrowDownward";
 import "./App.css";
 import {
   InputLabel,
@@ -68,49 +68,49 @@ const App = () => {
     setInput("");
   };
 
-
   return (
     <>
-    <h1>Welcome to CHHAMP</h1>
-    <div className="App">
-     
-      <div className="header">
-        
-        <form className="form_alignment">
-          <FormControl>
-            <InputLabel htmlFor="my-input">Enter your Message...</InputLabel>
+      <section className="App">
+        <h1 className="shadow">Welcome to CHHAMP</h1>
+        <section className="header">
+          <section className="messages">
+            {messages.map((messageContent) => {
+              return (
+                <Message
+                  message={messageContent.message}
+                  username={messageContent.username}
+                  thisUser={username}
+                />
+              );
+            })}
+          </section>
+          <form className="form_alignment">
+            <FormControl className="inputField">
+              <InputLabel htmlFor="my-input">Enter your Message...</InputLabel>
 
-            <Input
-              value={input}
-              onChange={SetInput}
-              id="my-input"
-              aria-describedby="my-helper-text"
-            />
-            <FormHelperText id="my-helper-text">
-              Your Messages are end to end encrypted
-            </FormHelperText>
-          </FormControl>
-          <Button onClick={sendMessage} className="submit" variant="contained">
-            <SendIcon />
-          </Button>
-        </form>
-
-        <div className="messages">
-          {messages.map((messageContent) => {
-            return (
-              <Message
-                message={messageContent.message}
-                username={messageContent.username}
-                thisUser={username}
+              <Input
+                value={input}
+                onChange={SetInput}
+                id="my-input"
+                aria-describedby="my-helper-text"
               />
-            );
-          })}
-        </div>
-        <div className="arr">
-          <ArrowDownwardIcon  />
-        </div>
-      </div>
-    </div>
+              <FormHelperText id="my-helper-text">
+                Your Messages are end to end encrypted
+              </FormHelperText>
+            </FormControl>
+            <Button
+              onClick={sendMessage}
+              className="sendButton"
+              variant="contained"
+            >
+              <SendIcon />
+            </Button>
+          </form>
+          <div className="arr">
+            <ArrowDownwardIcon />
+          </div>
+        </section>
+      </section>
     </>
   );
 };
