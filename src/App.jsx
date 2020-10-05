@@ -1,7 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import SendIcon from "@material-ui/icons/Send";
-import ArrowDownwardIcon from "@material-ui/icons/ArrowDownward";
 import "./App.css";
 import {
   InputLabel,
@@ -96,15 +95,15 @@ const App = () => {
             <FormHelperText id="my-helper-text">
               Your Messages are end to end encrypted
             </FormHelperText>
+            <Button
+              onClick={sendMessage}
+              className="sendButton"
+              variant="contained"
+              disabled={!input}
+            >
+              <SendIcon />
+            </Button>
           </FormControl>
-          <Button
-            onClick={sendMessage}
-            className="sendButton"
-            variant="contained"
-            disabled={!input}
-          >
-            <SendIcon />
-          </Button>
         </form>
       </section>
     </section>
